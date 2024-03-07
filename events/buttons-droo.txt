@@ -1,0 +1,182 @@
+const client = require("../main");
+const { WebhookClient, Message, MessageEmbed } = require("discord.js");
+const td = require('truth-dare');
+const axios = require('axios')
+const r = require('better-tord');
+// Reddit API credentials
+const reddit = new snoowrap({
+  userAgent: 'Discos/1.0',
+  clientId: process.env.CID,
+  clientSecret: process.env.CS,
+  username: process.env.RE,
+  password: process.env.PAD
+});
+client.guilds.cache.forEach(guild => {
+  console.log("got guilds")
+});
+// List of subreddits to choose from
+const ass = ['nsfw', 'hentai_gifs', 'pussy', 'creampie', 'hentai', 'LegalTeens', 'tiktokporn', 'homemadensfw', 'cum', "Nudes", 'GodPussy', 'Ratemypussy', 'SchoolgirlsXXX', 'Rule34', 'Penatration', 'stripgirls', 'snapleak', 'CumDumpsters',];
+// List of subreddits to choose from
+const pussy = ['nsfw', 'hentai_gifs', 'pussy', 'creampie', 'hentai', 'LegalTeens', 'tiktokporn', 'homemadensfw', 'cum', "Nudes", 'GodPussy', 'Ratemypussy', 'SchoolgirlsXXX', 'Rule34', 'Penatration', 'stripgirls', 'snapleak', 'CumDumpsters',];
+const random = ['nsfw', 'hentai_gifs', 'pussy', 'creampie', 'hentai', 'LegalTeens', 'tiktokporn', 'homemadensfw', 'cum', "Nudes", 'GodPussy', 'Ratemypussy', 'SchoolgirlsXXX', 'Rule34', 'Penatration', 'stripgirls', 'snapleak', 'CumDumpsters',];
+
+// Fetch random posts from subreddit
+async function fetchRandomPosts(subreddit) {
+  const sub = await reddit.getSubreddit(subreddit);
+  const randomPost = await sub.getRandomSubmission();
+  return randomPost;
+}
+
+// Fetch redgifs direct video URL
+async function fetchRedgifsVideoURL(url) {
+  const response = await axios.get(url);
+  const videoURL = response.data.mp4;
+  return videoURL;
+}
+
+// Post content to Discord channel
+async function postContentToDiscord(content) {
+
+
+  const channel = await client.channels.fetch(channelId);
+  await channel.send(content);
+}
+
+// Schedule the bot to run every 30 minutes
+cron.schedule('*/2 * * * *', async () => {
+  try {
+    const randomSubreddit = subreddits[Math.floor(Math.random() * subreddits.length)];
+    const randomPost = await fetchRandomPosts(randomSubreddit);
+
+    let content = randomPost.url;
+
+    if (randomPost.domain === 'redgifs.com') {
+      const videoURL = await fetchRedgifsVideoURL(randomPost.url);
+      content = videoURL;
+    }
+
+client.on('interactionCreate', async (interaction) => {
+ 
+    if (!interaction.isButton()) return;
+console.log(interaction);
+    if (interaction.customId == "truth") {
+ //        let ok = async () => {
+ // let wow = await axios.get('https://api.outerapi.tk/truth');
+ // let ee = wow.data
+ // return ee
+//}
+//let eeValue = await ok();
+//console.log(eeValue)
+        // Do what you want with button 'id1'.
+      const truth = r.get_truth();
+console.log(truth);
+      
+      const tr = new MessageEmbed()
+      .setTitle("Here is your truth")
+      .setDescription(`${truth}`)
+      .setColor("RANDOM")
+      interaction.reply({ content: "Make sure to reply", embeds:[tr], })
+    }
+
+   if (interaction.customId == "dare") {
+         let ok = async () => {
+  let wow = await axios.get('https://apis-1.daylncode.repl.co/dare');
+  let ee = wow.data
+  return ee
+}
+let eeValue = await ok();
+console.log(eeValue)
+        // Do what you want with button 'id1'.
+     
+
+      
+      const dar = new MessageEmbed()
+      .setTitle("Here is your dare:")
+      .setDescription(`${eeValue.result}`)
+      .setColor("RANDOM")
+      interaction.reply({ content: "Complete the dare", embeds:[dar], })
+    }
+
+
+  });
+  
+ 
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isSelectMenu()) return;
+  console.log(interaction);
+
+    const selectedValue = interaction.values[0];
+  
+    if (selectedValue === 'fun') {
+    const tr = new MessageEmbed()
+      .setTitle("Help Menu | Fun Menu")
+      .setDescription(`**/askbot**,**/avatar**,**/joke**,**/meme**\n**/quote**,**/say**,**/text**,**/truth-dare**,\n**/ship**,**/topic**,**/youtube-together**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    } else if (selectedValue === 'option2') {
+         const tr = new MessageEmbed()
+      .setTitle("Help Menu | Giveaway Menu")
+      .setDescription(`**/gw-start**,**/gw-end**,**/gw-delete**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    } else if (selectedValue === 'option3') {
+       const tr = new MessageEmbed()
+      .setTitle("Help Menu | Dev Menu")
+      .setDescription(`**/manage**,**/test**,**/leave-guild**,**/eval**\n**/deploy**,**/all-servers**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    }
+    else if (selectedValue === 'option4') {
+     const tr = new MessageEmbed()
+      .setTitle("Help Menu | Admin Menu")
+      .setDescription(`**/annouce**,**/createchannel**,**/direct-message**,**/nuke**\n,**/set-channel-welcome**,**/setup-suggestion**,**/suggest-reply**, **/start-shift** \n **/set-shift**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    
+    }
+      else if (selectedValue === 'option5') {
+         const tr = new MessageEmbed()
+      .setTitle("Help Menu | Mod Menu")
+      .setDescription(`**/ban**,**/clear**,**/kick**,**/moderate**\n**/mute**,**/nickname**,**/poll**,**/slow_mode**\n**/unban**,**/unban**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    }
+         else if (selectedValue === 'option6') {
+        const tr = new MessageEmbed()
+      .setTitle("Help Menu | Anime Action Menu")
+      .setDescription(`**/kiss**,`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true }); 
+    }
+                 else if (selectedValue === 'option7') {
+         const tr = new MessageEmbed()
+      .setTitle("Help Menu | Info Menu")
+      .setDescription(`**/botinfo**,**/donate**,**/emojis**,
+      **/set-channel- 
+ghostping**\n**/set-color-ghostping**,**/help**,**/invite**,**/members**\n**/ping**,**/server**,**/stats**,**/uptime**,**/user**,**/vote**`)
+      .setColor("RANDOM")
+      .setFooter("Made with 💖 By Radon Dev Group")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+    }
+    else if (selectedValue === 'ass') {
+     const tr = new MessageEmbed()
+      .setTitle("Ass Pic 🍑📸")
+      .setImage(``)
+      .setColor("RANDOM")
+  await  interaction.reply({ embeds:[tr], ephemeral: true });
+
+    }
+    
+ });
+  
+
+
+
+
+           

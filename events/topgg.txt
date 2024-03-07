@@ -1,0 +1,43 @@
+const { AutoPoster } = require('topgg-autoposter');
+const Topgg = require("@top-gg/sdk");
+
+//const ap = AutoPoster("YOUR-TOPGG-TOKEN", client)
+//ap.on('posted', () => {
+//  console.log('[TOPGG] :: Server count posted!')
+//})
+
+const webhook = new Topgg.Webhook("YOUR-AUTH-PASS-HERE")
+
+app.post("/api/v1/dbl", webhook.listener(async (vote) => {
+
+  const channel = client.channels.cache.get('CHANNEL_ID')
+  const user = client.users.cache.get(vote.user)
+  const timestamp = `<t:${Math.floor(Date.now() / 1000) + 43200}:R>`
+
+  const res = await fetch(`https://top.gg/api/bots/BOT_ID/votes`, {
+    method: 'GET',
+    headers: { 'Authorization': client.config.TOPGG.token }
+  })
+   const votes = await res.json()
+
+    const userVotes = votes.filter((votes) => votes.id === vote.user)
+    const streak = userVotes.length
+
+
+    channel.send({ embeds: [
+        new EmbedBuilder()
+        .setColor('#2b2d31')
+        .setTitle('Aprex gained a vote! 😀')
+        .setURL('https://top.gg/bot/BOT_ID/')
+        .setDescription(`Thank you for voting for Aprex!\nFeel free to [vote again later!](https://top.gg/bot/BOT_ID/)`)
+        .setThumbnail(user?.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: `Azury Industries ©️` })
+        .setTimestamp()
+        .addFields([
+            { name: '**Can vote again:**', value: `${timestamp}`, inline: true },
+            { name: '**Total votes:**', value: `${votes.length||0}`, inline: true },
+            { name: '**Vote Streak:**', value: `${streak}`, inline: true },
+        ])
+    ], content: `<@${vote.user}> has voted for **Aprex**!` })
+
+}))

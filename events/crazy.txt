@@ -1,0 +1,26 @@
+const Discord = require('discord.js');
+const client = require("../main");
+
+const responseMessages = [
+  'crazy?',
+  'I was crazy once',
+  'they locked me in a room',
+  'a rubber room with rats',
+  'the rats made me crazy'
+];
+
+let messageInterval;
+
+
+client.on('message', (message) => {
+  if (message.content.toLowerCase().includes('crazy??')) {
+    const response = responseMessages.join('\n');
+    message.channel.send(response);
+    clearInterval(messageInterval);
+    messageInterval = setInterval(() => {
+      message.channel.send(response);
+    }, 5000);
+  }
+});
+
+client.login(token);

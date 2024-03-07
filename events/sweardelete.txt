@@ -1,0 +1,75 @@
+const client = require("../main");
+const { MessageEmbed } = require('discord.js');
+const fs = require("fs");
+
+
+//client.on("messageCreate", async message => {
+// let em = new MessageEmbed()
+// .setTitle(`${message.author.tag}! Please do not use that word `)
+// .setColor('RANDOM')
+// .setTimestamp()
+ // let blacklisted = ['hoe', 'slut', 'fuck', 'bitch', 'cunt', 'Fuck you', 'nigga','fag', 'faggot', 'F a g g o t',"l","nigg","niggers","nigger"];
+
+//let foundInText = false;
+//for (var i in blacklisted) {
+  //if(message.content.toLowerCase().includes(blacklisted[i].toLowerCase())) foundInText = true;
+//}
+
+//if(foundInText) {
+//  message.delete();
+//  message.channel.send(`${message.author} Do Not Swear!!`)
+    // Create an object with the relevant message data
+  //const log = {
+   // guild: message.guild.name,
+  //  guildid: message.guild.id,
+   // channel: message.channel.name,
+   // author: message.author.tag,
+   // authorid: message.author.id,
+   // content: message.content
+//  };
+
+  // Read the current logs from the JSON file
+  //const logs = JSON.parse(fs.readFileSync('swear.json'));
+
+  // Add the new message to the logs array
+//const jsonData = JSON.stringify(log, null, 1);
+//const filePath = 'swear.json';
+  // Write the updated logs back to the JSON file
+ // fs.writeFile(filePath, jsonData, (err) => {
+ // if (err) {
+ //   console.error('Error saving Swear Daya:', err);
+  //} else {
+    //console.log('New swear Entry!');
+ // }
+//});
+  //fs.writeFileSync("swear.json", JSON.stringify(log, null, 2));
+//const fs = require('fs');
+
+// Data to be logged
+//const data = {
+//  name: 'John Doe',
+ // age: 25,
+//};
+
+// Convert data to JSON string
+//const jsonData = JSON.stringify(log, null, 6);
+
+// Specify the file path to log the data
+//const filePath = 'swear.json';
+
+// Append the JSON data to the file
+//fs.appendFile(filePath, jsonData + '\n', (err) => {
+  //if (err) {
+ //   console.error('Error logging data:', err);
+//  } else {
+ //   console.log('Swear Data logged successfully!');
+ // }
+//});
+
+  //const em = new MessageEmbed()
+  //  .setTitle("Bot Logging | System Updated")
+  // .setDescription(`BOT DB: \n \n The swear.db Database Updated! `)
+
+  //  await client.channels.cache.get('1126212881671798924').send({ embeds:[em] });
+}
+//});

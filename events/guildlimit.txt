@@ -1,0 +1,13 @@
+const client = require("../main");
+
+client.on('ready', (client) => {
+    setInterval(function() {
+client.guilds.cache.forEach((g) => {
+   if (g.memberCount > 3) return;
+   const user = client.users.cache.get(g.ownerId)
+   user.send({ content: `Hello, ${user} \n Due to the limit of members you have we have left your server to stop spam of our bot, Please feel free to reinvite it once your member count reachs the total ammount of **15 Members**! Sorry for this Problem if you think this is false please contact our team via Discord: https://discord.gg/fb9YDmztS3 , \n Thanks, \n Discoverse Dev Team`})
+    g.leave()
+    .then(m => console.log(`Left the guild ${m} because of less members`))
+}, 5 * 1000)
+})
+})
